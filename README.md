@@ -127,7 +127,7 @@ and set `PHOTON_BASE_URL=http://photon:2322` on the backend service. If the
 geocoder is down or unreachable, autocomplete silently degrades — manual
 address entry always works.
 
-## File uploads & storage (Phase 3)
+## File uploads & storage
 
 `FILE_UPLOAD` questions accept respondent files. Files never live in MongoDB —
 they go to a pluggable storage backend behind one interface; a Mongo
