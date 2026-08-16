@@ -11,13 +11,21 @@ MongoDB you own.
 
 **1. Build a rule in the editor**
 
-<!-- PASTE editor-demo.mp4 HERE (drag the file from C:\videos\readme-ready into this line in the GitHub web editor, replacing this comment) -->
+
+https://github.com/user-attachments/assets/f79771ec-fe82-4078-b7d5-28875a090e97
+
+
 
 *Unchecking "Always visible" and adding a `color1 not equals black` condition to the follow-up question — no code, saved as an unpublished draft until you hit Publish.*
 
 **2. Watch it fire in the embed**
 
 <!-- PASTE embed-demo.mp4 HERE (drag the file from C:\videos\readme-ready into this line in the GitHub web editor, replacing this comment) -->
+
+
+https://github.com/user-attachments/assets/ba42577c-3804-44bc-b685-e6b8474a2bd8
+
+
 
 *The "do you like the color black?" question exists only while the rule matches — type `black` as your favorite color and it disappears (and its answer is cleared).*
 
