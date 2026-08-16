@@ -4,9 +4,9 @@ The framework-agnostic Forms-Engine questionnaire renderer: the
 `<forms-engine>` custom element plus the shared model/rule-engine core.
 
 <!-- npm strips video players, so this is a poster frame linking to the demo videos (FR61-5). -->
-[![A conditional question shown live in the embedded questionnaire — it appears only while its visibility rule matches](https://raw.githubusercontent.com/forms-engine/forms-engine/main/docs/media/embed-demo.png)](https://github.com/forms-engine/forms-engine#see-it-in-60-seconds)
+[![A conditional question shown live in the embedded questionnaire — it appears only while its visibility rule matches](https://raw.githubusercontent.com/JoshuaLeoSmith/forms-engine/master/docs/media/embed-demo.png)](https://github.com/JoshuaLeoSmith/forms-engine#see-it-in-60-seconds)
 
-*▶ [Watch the 60-second demo on GitHub](https://github.com/forms-engine/forms-engine#see-it-in-60-seconds)*
+*▶ [Watch the 60-second demo on GitHub](https://github.com/JoshuaLeoSmith/forms-engine#see-it-in-60-seconds)*
 
 ```html
 <script type="module" src="https://unpkg.com/@forms-engine/renderer/dist/forms-engine.esm.js"></script>
@@ -26,4 +26,4 @@ import '@forms-engine/renderer'; // registers <forms-engine>
 - **Pure core:** `@forms-engine/renderer/core` exports the definition types,
   normalization, and rule engine with no DOM or Lit dependency.
 
-Part of [Forms-Engine](https://github.com/forms-engine/forms-engine) (MIT).
+Part of [Forms-Engine](https://github.com/JoshuaLeoSmith/forms-engine) (MIT).
