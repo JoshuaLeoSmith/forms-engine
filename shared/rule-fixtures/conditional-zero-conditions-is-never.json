@@ -1,0 +1,62 @@
+{
+  "name": "conditional-zero-conditions-is-never",
+  "description": "CONDITIONAL with zero conditions never shows (§6.2 \"never shown\" state).",
+  "definitionFragment": {
+    "schemaVersion": 1,
+    "steps": [],
+    "tabs": [],
+    "questions": [
+      {
+        "id": "id-q1",
+        "code": "q1",
+        "sectionTitle": "",
+        "prompt": "prompt q1",
+        "type": "TEXT_BOX",
+        "width": "DEFAULT",
+        "typeConfig": {
+          "size": "MEDIUM"
+        },
+        "visibility": {
+          "mode": "ALWAYS"
+        },
+        "requirement": {
+          "mode": "NEVER"
+        }
+      },
+      {
+        "id": "id-q2",
+        "code": "q2",
+        "sectionTitle": "",
+        "prompt": "prompt q2",
+        "type": "TEXT_BOX",
+        "width": "DEFAULT",
+        "typeConfig": {
+          "size": "MEDIUM"
+        },
+        "visibility": {
+          "mode": "CONDITIONAL",
+          "rule": {
+            "combinator": "ALL",
+            "conditions": []
+          }
+        },
+        "requirement": {
+          "mode": "NEVER"
+        }
+      }
+    ]
+  },
+  "answers": {
+    "q2": "stale"
+  },
+  "expected": {
+    "capHit": false,
+    "visibleQuestionCodes": [
+      "q1"
+    ],
+    "requiredQuestionCodes": [],
+    "clearedCodes": [
+      "q2"
+    ]
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "name": "@forms-engine/angular",
+  "version": "1.1.0",
+  "description": "Thin Angular wrapper for the <forms-engine> web component.",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "ngc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@forms-engine/renderer": "1.1.0",
+    "tslib": "^2.8.0"
+  },
+  "peerDependencies": {
+    "@angular/core": ">=22.0.0"
+  },
+  "devDependencies": {
+    "@angular/compiler": "^22.1.0",
+    "@angular/compiler-cli": "^22.1.0",
+    "@angular/core": "^22.1.0",
+    "rxjs": "~7.8.0",
+    "typescript": "~6.0.2",
+    "zone.js": "~0.15.0"
+  }
+}

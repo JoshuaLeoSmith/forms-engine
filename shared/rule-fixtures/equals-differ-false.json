@@ -1,0 +1,67 @@
+{
+  "name": "equals-differ-false",
+  "description": "EQUALS is false when answered and values differ.",
+  "definitionFragment": {
+    "schemaVersion": 1,
+    "steps": [],
+    "tabs": [],
+    "questions": [
+      {
+        "id": "id-q1",
+        "code": "q1",
+        "sectionTitle": "",
+        "prompt": "prompt q1",
+        "type": "TEXT_BOX",
+        "width": "DEFAULT",
+        "typeConfig": {
+          "size": "MEDIUM"
+        },
+        "visibility": {
+          "mode": "ALWAYS"
+        },
+        "requirement": {
+          "mode": "NEVER"
+        }
+      },
+      {
+        "id": "id-q2",
+        "code": "q2",
+        "sectionTitle": "",
+        "prompt": "prompt q2",
+        "type": "TEXT_BOX",
+        "width": "DEFAULT",
+        "typeConfig": {
+          "size": "MEDIUM"
+        },
+        "visibility": {
+          "mode": "CONDITIONAL",
+          "rule": {
+            "combinator": "ALL",
+            "conditions": [
+              {
+                "source": "QUESTION",
+                "questionCode": "q1",
+                "operator": "EQUALS",
+                "value": "yes"
+              }
+            ]
+          }
+        },
+        "requirement": {
+          "mode": "NEVER"
+        }
+      }
+    ]
+  },
+  "answers": {
+    "q1": "no"
+  },
+  "expected": {
+    "capHit": false,
+    "visibleQuestionCodes": [
+      "q1"
+    ],
+    "requiredQuestionCodes": [],
+    "clearedCodes": []
+  }
+}

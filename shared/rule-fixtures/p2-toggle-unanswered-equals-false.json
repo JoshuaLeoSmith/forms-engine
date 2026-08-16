@@ -1,0 +1,67 @@
+{
+  "name": "p2-toggle-unanswered-equals-false",
+  "description": "EQUALS false does NOT fire against an untouched toggle (no key, no default — P2-D4).",
+  "definitionFragment": {
+    "schemaVersion": 2,
+    "steps": [],
+    "tabs": [],
+    "questions": [
+      {
+        "id": "id-t1",
+        "code": "t1",
+        "sectionTitle": "",
+        "prompt": "prompt t1",
+        "type": "TOGGLE",
+        "width": "DEFAULT",
+        "typeConfig": {
+          "trueLabel": "Yes",
+          "falseLabel": "No"
+        },
+        "visibility": {
+          "mode": "ALWAYS"
+        },
+        "requirement": {
+          "mode": "NEVER"
+        }
+      },
+      {
+        "id": "id-dep",
+        "code": "dep",
+        "sectionTitle": "",
+        "prompt": "prompt dep",
+        "type": "TEXT_BOX",
+        "width": "DEFAULT",
+        "typeConfig": {
+          "size": "MEDIUM",
+          "maxLength": null
+        },
+        "visibility": {
+          "mode": "CONDITIONAL",
+          "rule": {
+            "combinator": "ALL",
+            "conditions": [
+              {
+                "source": "QUESTION",
+                "questionCode": "t1",
+                "operator": "EQUALS",
+                "value": false
+              }
+            ]
+          }
+        },
+        "requirement": {
+          "mode": "NEVER"
+        }
+      }
+    ]
+  },
+  "answers": {},
+  "expected": {
+    "capHit": false,
+    "visibleQuestionCodes": [
+      "t1"
+    ],
+    "requiredQuestionCodes": [],
+    "clearedCodes": []
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "name": "unknown-operator-false",
+  "description": "A condition with an unknown operator evaluates to false (open enum, NFR-6).",
+  "definitionFragment": {
+    "schemaVersion": 1,
+    "steps": [],
+    "tabs": [],
+    "questions": [
+      {
+        "id": "id-q1",
+        "code": "q1",
+        "sectionTitle": "",
+        "prompt": "prompt q1",
+        "type": "TEXT_BOX",
+        "width": "DEFAULT",
+        "typeConfig": {
+          "size": "MEDIUM"
+        },
+        "visibility": {
+          "mode": "ALWAYS"
+        },
+        "requirement": {
+          "mode": "NEVER"
+        }
+      },
+      {
+        "id": "id-q2",
+        "code": "q2",
+        "sectionTitle": "",
+        "prompt": "prompt q2",
+        "type": "TEXT_BOX",
+        "width": "DEFAULT",
+        "typeConfig": {
+          "size": "MEDIUM"
+        },
+        "visibility": {
+          "mode": "CONDITIONAL",
+          "rule": {
+            "combinator": "ALL",
+            "conditions": [
+              {
+                "source": "QUESTION",
+                "questionCode": "q1",
+                "operator": "GREATER_THAN",
+                "value": "5"
+              }
+            ]
+          }
+        },
+        "requirement": {
+          "mode": "NEVER"
+        }
+      }
+    ]
+  },
+  "answers": {
+    "q1": "9"
+  },
+  "expected": {
+    "capHit": false,
+    "visibleQuestionCodes": [
+      "q1"
+    ],
+    "requiredQuestionCodes": [],
+    "clearedCodes": []
+  }
+}

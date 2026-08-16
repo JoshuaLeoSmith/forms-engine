@@ -1,0 +1,13 @@
+# Applies to builds whose context is the repo root (editor/Dockerfile).
+# Never ship host node_modules or build output into the image — platform
+# binaries from the host would clobber the container's own installs.
+.git
+.angular
+**/node_modules
+**/dist
+**/.angular
+backend
+e2e
+docs
+test-results
+playwright-report

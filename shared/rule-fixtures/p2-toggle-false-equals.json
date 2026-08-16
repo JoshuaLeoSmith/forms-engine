@@ -1,0 +1,70 @@
+{
+  "name": "p2-toggle-false-equals",
+  "description": "A false TOGGLE answer is an answer: EQUALS false fires.",
+  "definitionFragment": {
+    "schemaVersion": 2,
+    "steps": [],
+    "tabs": [],
+    "questions": [
+      {
+        "id": "id-t1",
+        "code": "t1",
+        "sectionTitle": "",
+        "prompt": "prompt t1",
+        "type": "TOGGLE",
+        "width": "DEFAULT",
+        "typeConfig": {
+          "trueLabel": "Yes",
+          "falseLabel": "No"
+        },
+        "visibility": {
+          "mode": "ALWAYS"
+        },
+        "requirement": {
+          "mode": "NEVER"
+        }
+      },
+      {
+        "id": "id-dep",
+        "code": "dep",
+        "sectionTitle": "",
+        "prompt": "prompt dep",
+        "type": "TEXT_BOX",
+        "width": "DEFAULT",
+        "typeConfig": {
+          "size": "MEDIUM",
+          "maxLength": null
+        },
+        "visibility": {
+          "mode": "CONDITIONAL",
+          "rule": {
+            "combinator": "ALL",
+            "conditions": [
+              {
+                "source": "QUESTION",
+                "questionCode": "t1",
+                "operator": "EQUALS",
+                "value": false
+              }
+            ]
+          }
+        },
+        "requirement": {
+          "mode": "NEVER"
+        }
+      }
+    ]
+  },
+  "answers": {
+    "t1": false
+  },
+  "expected": {
+    "capHit": false,
+    "visibleQuestionCodes": [
+      "t1",
+      "dep"
+    ],
+    "requiredQuestionCodes": [],
+    "clearedCodes": []
+  }
+}

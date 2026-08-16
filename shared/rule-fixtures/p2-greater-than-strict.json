@@ -1,0 +1,102 @@
+{
+  "name": "p2-greater-than-strict",
+  "description": "GREATER_THAN is strict: 5 > 4 fires, 5 > 5 does not.",
+  "definitionFragment": {
+    "schemaVersion": 2,
+    "steps": [],
+    "tabs": [],
+    "questions": [
+      {
+        "id": "id-n1",
+        "code": "n1",
+        "sectionTitle": "",
+        "prompt": "prompt n1",
+        "type": "NUMBER",
+        "width": "DEFAULT",
+        "typeConfig": {
+          "min": null,
+          "max": null,
+          "decimalPlaces": null,
+          "adornment": "NONE",
+          "currencySymbol": "$"
+        },
+        "visibility": {
+          "mode": "ALWAYS"
+        },
+        "requirement": {
+          "mode": "NEVER"
+        }
+      },
+      {
+        "id": "id-gt4",
+        "code": "gt4",
+        "sectionTitle": "",
+        "prompt": "prompt gt4",
+        "type": "TEXT_BOX",
+        "width": "DEFAULT",
+        "typeConfig": {
+          "size": "MEDIUM",
+          "maxLength": null
+        },
+        "visibility": {
+          "mode": "CONDITIONAL",
+          "rule": {
+            "combinator": "ALL",
+            "conditions": [
+              {
+                "source": "QUESTION",
+                "questionCode": "n1",
+                "operator": "GREATER_THAN",
+                "value": 4
+              }
+            ]
+          }
+        },
+        "requirement": {
+          "mode": "NEVER"
+        }
+      },
+      {
+        "id": "id-gt5",
+        "code": "gt5",
+        "sectionTitle": "",
+        "prompt": "prompt gt5",
+        "type": "TEXT_BOX",
+        "width": "DEFAULT",
+        "typeConfig": {
+          "size": "MEDIUM",
+          "maxLength": null
+        },
+        "visibility": {
+          "mode": "CONDITIONAL",
+          "rule": {
+            "combinator": "ALL",
+            "conditions": [
+              {
+                "source": "QUESTION",
+                "questionCode": "n1",
+                "operator": "GREATER_THAN",
+                "value": 5
+              }
+            ]
+          }
+        },
+        "requirement": {
+          "mode": "NEVER"
+        }
+      }
+    ]
+  },
+  "answers": {
+    "n1": 5
+  },
+  "expected": {
+    "capHit": false,
+    "visibleQuestionCodes": [
+      "n1",
+      "gt4"
+    ],
+    "requiredQuestionCodes": [],
+    "clearedCodes": []
+  }
+}

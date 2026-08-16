@@ -1,0 +1,156 @@
+{
+  "name": "tab-requirement-cascade",
+  "description": "A matching requirement rule on a tab makes its visible questions required; OR-combined with own requirement (§6.4).",
+  "definitionFragment": {
+    "schemaVersion": 1,
+    "steps": [
+      {
+        "id": "id-s1",
+        "title": "s1",
+        "visibility": {
+          "mode": "ALWAYS"
+        },
+        "requirement": {
+          "mode": "NEVER"
+        },
+        "tabs": [
+          {
+            "id": "id-t1",
+            "title": "t1",
+            "visibility": {
+              "mode": "ALWAYS"
+            },
+            "requirement": {
+              "mode": "NEVER"
+            },
+            "questions": [
+              {
+                "id": "id-mode",
+                "code": "mode",
+                "sectionTitle": "",
+                "prompt": "prompt mode",
+                "type": "TEXT_BOX",
+                "width": "DEFAULT",
+                "typeConfig": {
+                  "size": "MEDIUM"
+                },
+                "visibility": {
+                  "mode": "ALWAYS"
+                },
+                "requirement": {
+                  "mode": "NEVER"
+                }
+              }
+            ]
+          },
+          {
+            "id": "id-t2",
+            "title": "t2",
+            "visibility": {
+              "mode": "ALWAYS"
+            },
+            "requirement": {
+              "mode": "CONDITIONAL",
+              "rule": {
+                "combinator": "ALL",
+                "conditions": [
+                  {
+                    "source": "QUESTION",
+                    "questionCode": "mode",
+                    "operator": "EQUALS",
+                    "value": "strict"
+                  }
+                ]
+              }
+            },
+            "questions": [
+              {
+                "id": "id-a",
+                "code": "a",
+                "sectionTitle": "",
+                "prompt": "prompt a",
+                "type": "TEXT_BOX",
+                "width": "DEFAULT",
+                "typeConfig": {
+                  "size": "MEDIUM"
+                },
+                "visibility": {
+                  "mode": "ALWAYS"
+                },
+                "requirement": {
+                  "mode": "NEVER"
+                }
+              },
+              {
+                "id": "id-b",
+                "code": "b",
+                "sectionTitle": "",
+                "prompt": "prompt b",
+                "type": "TEXT_BOX",
+                "width": "DEFAULT",
+                "typeConfig": {
+                  "size": "MEDIUM"
+                },
+                "visibility": {
+                  "mode": "ALWAYS"
+                },
+                "requirement": {
+                  "mode": "ALWAYS"
+                }
+              }
+            ]
+          },
+          {
+            "id": "id-t3",
+            "title": "t3",
+            "visibility": {
+              "mode": "ALWAYS"
+            },
+            "requirement": {
+              "mode": "NEVER"
+            },
+            "questions": [
+              {
+                "id": "id-c",
+                "code": "c",
+                "sectionTitle": "",
+                "prompt": "prompt c",
+                "type": "TEXT_BOX",
+                "width": "DEFAULT",
+                "typeConfig": {
+                  "size": "MEDIUM"
+                },
+                "visibility": {
+                  "mode": "ALWAYS"
+                },
+                "requirement": {
+                  "mode": "NEVER"
+                }
+              }
+            ]
+          }
+        ],
+        "questions": []
+      }
+    ],
+    "tabs": [],
+    "questions": []
+  },
+  "answers": {
+    "mode": "strict"
+  },
+  "expected": {
+    "capHit": false,
+    "visibleQuestionCodes": [
+      "mode",
+      "a",
+      "b",
+      "c"
+    ],
+    "requiredQuestionCodes": [
+      "a",
+      "b"
+    ],
+    "clearedCodes": []
+  }
+}

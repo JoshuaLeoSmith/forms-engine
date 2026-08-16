@@ -1,0 +1,36 @@
+spring:
+  data:
+    mongodb:
+      auto-index-creation: true
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+
+de:
+  flapdoodle:
+    mongodb:
+      embedded:
+        version: 7.0.14
+
+forms:
+  rate-limit:
+    enabled: false
+    capacity: 20
+    refill-per-second: 10
+    geocode-capacity: 10
+    geocode-refill-per-second: 2
+    upload-capacity: 30
+    upload-refill-per-second: 0.05
+  photon:
+    # Tests never talk to the real Photon; an unreachable port makes any
+    # unstubbed geocode call degrade to [] instantly.
+    base-url: http://127.0.0.1:1
+  storage:
+    # Keeps the startup canary (FR3-6) green for every test context; upload
+    # tests that need isolation point fs-path at a @TempDir instead.
+    mode: filesystem
+    fs-path: ./target/test-uploads
+  uploads:
+    # Never run the cleanup job as a scheduling side effect in tests —
+    # FileCleanupTest calls runOnce() explicitly.
+    cleanup-enabled: false

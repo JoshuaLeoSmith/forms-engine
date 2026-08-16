@@ -1,0 +1,150 @@
+{
+  "name": "p2-new-types-required",
+  "description": "Valid-config Phase-2 types participate in requirement like any question.",
+  "definitionFragment": {
+    "schemaVersion": 2,
+    "steps": [],
+    "tabs": [],
+    "questions": [
+      {
+        "id": "id-n1",
+        "code": "n1",
+        "sectionTitle": "",
+        "prompt": "prompt n1",
+        "type": "NUMBER",
+        "width": "DEFAULT",
+        "typeConfig": {
+          "min": null,
+          "max": null,
+          "decimalPlaces": null,
+          "adornment": "NONE",
+          "currencySymbol": "$"
+        },
+        "visibility": {
+          "mode": "ALWAYS"
+        },
+        "requirement": {
+          "mode": "ALWAYS"
+        }
+      },
+      {
+        "id": "id-t1",
+        "code": "t1",
+        "sectionTitle": "",
+        "prompt": "prompt t1",
+        "type": "TOGGLE",
+        "width": "DEFAULT",
+        "typeConfig": {
+          "trueLabel": "Yes",
+          "falseLabel": "No"
+        },
+        "visibility": {
+          "mode": "ALWAYS"
+        },
+        "requirement": {
+          "mode": "ALWAYS"
+        }
+      },
+      {
+        "id": "id-d1",
+        "code": "d1",
+        "sectionTitle": "",
+        "prompt": "prompt d1",
+        "type": "DATE",
+        "width": "DEFAULT",
+        "typeConfig": {
+          "minDate": null,
+          "maxDate": null,
+          "disallowPast": false,
+          "disallowFuture": false
+        },
+        "visibility": {
+          "mode": "ALWAYS"
+        },
+        "requirement": {
+          "mode": "ALWAYS"
+        }
+      },
+      {
+        "id": "id-c1",
+        "code": "c1",
+        "sectionTitle": "",
+        "prompt": "prompt c1",
+        "type": "CHECKBOX",
+        "width": "DEFAULT",
+        "typeConfig": {
+          "options": [
+            {
+              "id": "o1",
+              "label": "A"
+            },
+            {
+              "id": "o2",
+              "label": "B"
+            },
+            {
+              "id": "o3",
+              "label": "C"
+            }
+          ],
+          "maxSelections": null
+        },
+        "visibility": {
+          "mode": "ALWAYS"
+        },
+        "requirement": {
+          "mode": "ALWAYS"
+        }
+      },
+      {
+        "id": "id-addr",
+        "code": "addr",
+        "sectionTitle": "",
+        "prompt": "prompt addr",
+        "type": "ADDRESS",
+        "width": "DEFAULT",
+        "typeConfig": {
+          "enabledFields": {
+            "line2": true,
+            "state": true,
+            "postalCode": true
+          },
+          "requiredFields": {
+            "country": true,
+            "line1": true,
+            "city": true,
+            "state": true,
+            "postalCode": true
+          },
+          "defaultCountry": "US",
+          "autocomplete": true
+        },
+        "visibility": {
+          "mode": "ALWAYS"
+        },
+        "requirement": {
+          "mode": "ALWAYS"
+        }
+      }
+    ]
+  },
+  "answers": {},
+  "expected": {
+    "capHit": false,
+    "visibleQuestionCodes": [
+      "n1",
+      "t1",
+      "d1",
+      "c1",
+      "addr"
+    ],
+    "requiredQuestionCodes": [
+      "n1",
+      "t1",
+      "d1",
+      "c1",
+      "addr"
+    ],
+    "clearedCodes": []
+  }
+}

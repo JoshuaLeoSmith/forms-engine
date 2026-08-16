@@ -1,0 +1,70 @@
+{
+  "name": "question-requirement-conditional",
+  "description": "CONDITIONAL requirement on a question follows its rule.",
+  "definitionFragment": {
+    "schemaVersion": 1,
+    "steps": [],
+    "tabs": [],
+    "questions": [
+      {
+        "id": "id-q1",
+        "code": "q1",
+        "sectionTitle": "",
+        "prompt": "prompt q1",
+        "type": "TEXT_BOX",
+        "width": "DEFAULT",
+        "typeConfig": {
+          "size": "MEDIUM"
+        },
+        "visibility": {
+          "mode": "ALWAYS"
+        },
+        "requirement": {
+          "mode": "NEVER"
+        }
+      },
+      {
+        "id": "id-q2",
+        "code": "q2",
+        "sectionTitle": "",
+        "prompt": "prompt q2",
+        "type": "TEXT_BOX",
+        "width": "DEFAULT",
+        "typeConfig": {
+          "size": "MEDIUM"
+        },
+        "visibility": {
+          "mode": "ALWAYS"
+        },
+        "requirement": {
+          "mode": "CONDITIONAL",
+          "rule": {
+            "combinator": "ALL",
+            "conditions": [
+              {
+                "source": "QUESTION",
+                "questionCode": "q1",
+                "operator": "EQUALS",
+                "value": "strict"
+              }
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "answers": {
+    "q1": "strict"
+  },
+  "expected": {
+    "capHit": false,
+    "visibleQuestionCodes": [
+      "q1",
+      "q2"
+    ],
+    "requiredQuestionCodes": [
+      "q2"
+    ],
+    "clearedCodes": []
+  }
+}

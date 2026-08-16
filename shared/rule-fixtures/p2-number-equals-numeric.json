@@ -1,0 +1,73 @@
+{
+  "name": "p2-number-equals-numeric",
+  "description": "NUMBER EQUALS uses numeric equality against a typed number value.",
+  "definitionFragment": {
+    "schemaVersion": 2,
+    "steps": [],
+    "tabs": [],
+    "questions": [
+      {
+        "id": "id-n1",
+        "code": "n1",
+        "sectionTitle": "",
+        "prompt": "prompt n1",
+        "type": "NUMBER",
+        "width": "DEFAULT",
+        "typeConfig": {
+          "min": null,
+          "max": null,
+          "decimalPlaces": null,
+          "adornment": "NONE",
+          "currencySymbol": "$"
+        },
+        "visibility": {
+          "mode": "ALWAYS"
+        },
+        "requirement": {
+          "mode": "NEVER"
+        }
+      },
+      {
+        "id": "id-dep",
+        "code": "dep",
+        "sectionTitle": "",
+        "prompt": "prompt dep",
+        "type": "TEXT_BOX",
+        "width": "DEFAULT",
+        "typeConfig": {
+          "size": "MEDIUM",
+          "maxLength": null
+        },
+        "visibility": {
+          "mode": "CONDITIONAL",
+          "rule": {
+            "combinator": "ALL",
+            "conditions": [
+              {
+                "source": "QUESTION",
+                "questionCode": "n1",
+                "operator": "EQUALS",
+                "value": 12.5
+              }
+            ]
+          }
+        },
+        "requirement": {
+          "mode": "NEVER"
+        }
+      }
+    ]
+  },
+  "answers": {
+    "n1": 12.5
+  },
+  "expected": {
+    "capHit": false,
+    "visibleQuestionCodes": [
+      "n1",
+      "dep"
+    ],
+    "requiredQuestionCodes": [],
+    "clearedCodes": []
+  }
+}

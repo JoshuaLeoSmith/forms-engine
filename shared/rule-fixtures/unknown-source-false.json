@@ -1,0 +1,67 @@
+{
+  "name": "unknown-source-false",
+  "description": "A condition with an unknown source discriminator evaluates to false (forward-compat, §6.1).",
+  "definitionFragment": {
+    "schemaVersion": 1,
+    "steps": [],
+    "tabs": [],
+    "questions": [
+      {
+        "id": "id-q1",
+        "code": "q1",
+        "sectionTitle": "",
+        "prompt": "prompt q1",
+        "type": "TEXT_BOX",
+        "width": "DEFAULT",
+        "typeConfig": {
+          "size": "MEDIUM"
+        },
+        "visibility": {
+          "mode": "ALWAYS"
+        },
+        "requirement": {
+          "mode": "NEVER"
+        }
+      },
+      {
+        "id": "id-q2",
+        "code": "q2",
+        "sectionTitle": "",
+        "prompt": "prompt q2",
+        "type": "TEXT_BOX",
+        "width": "DEFAULT",
+        "typeConfig": {
+          "size": "MEDIUM"
+        },
+        "visibility": {
+          "mode": "CONDITIONAL",
+          "rule": {
+            "combinator": "ALL",
+            "conditions": [
+              {
+                "source": "EXTERNAL",
+                "questionCode": "q1",
+                "operator": "EQUALS",
+                "value": "x"
+              }
+            ]
+          }
+        },
+        "requirement": {
+          "mode": "NEVER"
+        }
+      }
+    ]
+  },
+  "answers": {
+    "q1": "x"
+  },
+  "expected": {
+    "capHit": false,
+    "visibleQuestionCodes": [
+      "q1"
+    ],
+    "requiredQuestionCodes": [],
+    "clearedCodes": []
+  }
+}

@@ -1,0 +1,106 @@
+{
+  "name": "p2-clearing-via-greater-than",
+  "description": "Clearing cascade: hiding via GREATER_THAN clears the hidden answer, which cascades onward.",
+  "definitionFragment": {
+    "schemaVersion": 2,
+    "steps": [],
+    "tabs": [],
+    "questions": [
+      {
+        "id": "id-n1",
+        "code": "n1",
+        "sectionTitle": "",
+        "prompt": "prompt n1",
+        "type": "NUMBER",
+        "width": "DEFAULT",
+        "typeConfig": {
+          "min": null,
+          "max": null,
+          "decimalPlaces": null,
+          "adornment": "NONE",
+          "currencySymbol": "$"
+        },
+        "visibility": {
+          "mode": "ALWAYS"
+        },
+        "requirement": {
+          "mode": "NEVER"
+        }
+      },
+      {
+        "id": "id-mid",
+        "code": "mid",
+        "sectionTitle": "",
+        "prompt": "prompt mid",
+        "type": "TEXT_BOX",
+        "width": "DEFAULT",
+        "typeConfig": {
+          "size": "MEDIUM",
+          "maxLength": null
+        },
+        "visibility": {
+          "mode": "CONDITIONAL",
+          "rule": {
+            "combinator": "ALL",
+            "conditions": [
+              {
+                "source": "QUESTION",
+                "questionCode": "n1",
+                "operator": "GREATER_THAN",
+                "value": 5
+              }
+            ]
+          }
+        },
+        "requirement": {
+          "mode": "NEVER"
+        }
+      },
+      {
+        "id": "id-leaf",
+        "code": "leaf",
+        "sectionTitle": "",
+        "prompt": "prompt leaf",
+        "type": "TEXT_BOX",
+        "width": "DEFAULT",
+        "typeConfig": {
+          "size": "MEDIUM",
+          "maxLength": null
+        },
+        "visibility": {
+          "mode": "CONDITIONAL",
+          "rule": {
+            "combinator": "ALL",
+            "conditions": [
+              {
+                "source": "QUESTION",
+                "questionCode": "mid",
+                "operator": "EQUALS",
+                "value": "kept"
+              }
+            ]
+          }
+        },
+        "requirement": {
+          "mode": "NEVER"
+        }
+      }
+    ]
+  },
+  "answers": {
+    "n1": 3,
+    "mid": "kept",
+    "leaf": "downstream"
+  },
+  "expected": {
+    "capHit": false,
+    "visibleQuestionCodes": [
+      "n1"
+    ],
+    "requiredQuestionCodes": [],
+    "clearedCodes": [
+      "mid",
+      "leaf"
+    ]
+  }
+}

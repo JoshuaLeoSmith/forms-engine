@@ -1,0 +1,84 @@
+@use '@angular/material' as mat;
+
+html {
+  color-scheme: light;
+  @include mat.theme((
+    color: mat.$azure-palette,
+    typography: Roboto,
+    density: 0,
+  ));
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: Roboto, 'Segoe UI', sans-serif;
+  background: var(--mat-sys-surface-container-low, #f6f7f9);
+  color: var(--mat-sys-on-surface, #1f2430);
+}
+
+/* Shared editor primitives ------------------------------------------------ */
+.fe-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.fe-card {
+  background: var(--mat-sys-surface, #fff);
+  border: 1px solid var(--mat-sys-outline-variant, #d4d8df);
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.fe-muted {
+  color: var(--mat-sys-on-surface-variant, #5f6672);
+}
+
+.fe-spacer {
+  flex: 1 1 auto;
+}
+
+.fe-error-list {
+  color: var(--mat-sys-error, #c62828);
+  margin: 8px 0 0;
+  padding-left: 20px;
+}
+
+.fe-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  line-height: 1;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--mat-sys-primary, #3f51b5) 12%, white);
+  color: var(--mat-sys-primary, #3f51b5);
+  white-space: nowrap;
+}
+
+.fe-badge.fe-badge-warn {
+  background: color-mix(in srgb, #b26a00 14%, white);
+  color: #b26a00;
+}
+
+/* Shrink the icon's 24px host box to the glyph so the flexbox centering
+   actually centers the visible eye/exclamation with the badge text. */
+.fe-badge mat-icon {
+  font-size: 13px;
+  width: 13px;
+  height: 13px;
+  line-height: 13px;
+  flex: none;
+  overflow: visible;
+}
+
+/* Phase 4 FR4-5: the full-screen draft preview overlay. */
+.fe-preview-panel .mat-mdc-dialog-surface {
+  border-radius: 0;
+}

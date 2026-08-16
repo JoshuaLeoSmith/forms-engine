@@ -1,32 +1,18 @@
 {
-  "name": "forms-engine",
-  "version": "0.0.0",
-  "scripts": {
-    "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
-    "watch": "ng build --watch --configuration development",
-    "test": "ng test"
-  },
+  "name": "forms-engine-monorepo",
   "private": true,
-  "packageManager": "npm@12.0.2",
-  "dependencies": {
-    "@angular/common": "^22.1.0",
-    "@angular/compiler": "^22.1.0",
-    "@angular/core": "^22.1.0",
-    "@angular/forms": "^22.1.0",
-    "@angular/platform-browser": "^22.1.0",
-    "@angular/router": "^22.1.0",
-    "rxjs": "~7.8.0",
-    "tslib": "^2.3.0"
-  },
-  "devDependencies": {
-    "@angular/build": "^22.1.2",
-    "@angular/cli": "^22.1.2",
-    "@angular/compiler-cli": "^22.1.0",
-    "jsdom": "^28.0.0",
-    "prettier": "^3.8.1",
-    "typescript": "~6.0.2",
-    "vitest": "^4.0.8"
+  "version": "1.0.0",
+  "license": "MIT",
+  "workspaces": [
+    "packages/renderer",
+    "packages/react",
+    "packages/angular",
+    "examples/react",
+    "examples/angular"
+  ],
+  "scripts": {
+    "build": "npm run build -w @forms-engine/renderer && npm run build -w @forms-engine/react && npm run build -w @forms-engine/angular",
+    "build:examples": "npm run build -w forms-engine-example-react && npm run build -w forms-engine-example-angular",
+    "test": "npm run test -w @forms-engine/renderer"
   }
 }

@@ -1,0 +1,33 @@
+{
+  "name": "equals-unanswered-false",
+  "description": "EQUALS against an unanswered question is false (§6.3 truth table): the dependent question stays hidden.",
+  "definitionFragment": {
+    "schemaVersion": 1,
+    "steps": [],
+    "tabs": [],
+    "questions": [
+      {
+        "id": "id-q1", "code": "q1", "sectionTitle": "", "prompt": "p1",
+        "type": "TEXT_BOX", "width": "DEFAULT", "typeConfig": { "size": "MEDIUM" },
+        "visibility": { "mode": "ALWAYS" }, "requirement": { "mode": "NEVER" }
+      },
+      {
+        "id": "id-q2", "code": "q2", "sectionTitle": "", "prompt": "p2",
+        "type": "TEXT_BOX", "width": "DEFAULT", "typeConfig": { "size": "MEDIUM" },
+        "visibility": {
+          "mode": "CONDITIONAL",
+          "rule": { "combinator": "ALL", "conditions": [
+            { "source": "QUESTION", "questionCode": "q1", "operator": "EQUALS", "value": "yes" }
+          ] }
+        },
+        "requirement": { "mode": "NEVER" }
+      }
+    ]
+  },
+  "answers": {},
+  "expected": {
+    "visibleQuestionCodes": ["q1"],
+    "requiredQuestionCodes": [],
+    "clearedCodes": []
+  }
+}

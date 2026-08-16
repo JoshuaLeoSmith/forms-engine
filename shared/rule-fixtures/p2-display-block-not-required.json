@@ -1,0 +1,57 @@
+{
+  "name": "p2-display-block-not-required",
+  "description": "DISPLAY_BLOCK entries have no code, are never required and never break evaluation (§6.9).",
+  "definitionFragment": {
+    "schemaVersion": 2,
+    "steps": [],
+    "tabs": [],
+    "questions": [
+      {
+        "id": "id-blk0",
+        "code": "",
+        "sectionTitle": "",
+        "prompt": "prompt (display)",
+        "type": "DISPLAY_BLOCK",
+        "width": "DEFAULT",
+        "typeConfig": {
+          "content": "Note: **read this**."
+        },
+        "visibility": {
+          "mode": "ALWAYS"
+        },
+        "requirement": {
+          "mode": "NEVER"
+        }
+      },
+      {
+        "id": "id-t1",
+        "code": "t1",
+        "sectionTitle": "",
+        "prompt": "prompt t1",
+        "type": "TEXT_BOX",
+        "width": "DEFAULT",
+        "typeConfig": {
+          "size": "MEDIUM",
+          "maxLength": null
+        },
+        "visibility": {
+          "mode": "ALWAYS"
+        },
+        "requirement": {
+          "mode": "ALWAYS"
+        }
+      }
+    ]
+  },
+  "answers": {},
+  "expected": {
+    "capHit": false,
+    "visibleQuestionCodes": [
+      "t1"
+    ],
+    "requiredQuestionCodes": [
+      "t1"
+    ],
+    "clearedCodes": []
+  }
+}

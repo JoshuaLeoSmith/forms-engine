@@ -1,0 +1,85 @@
+{
+  "name": "p2-not-contains-true",
+  "description": "NOT_CONTAINS is true when answered and the value is absent from the array.",
+  "definitionFragment": {
+    "schemaVersion": 2,
+    "steps": [],
+    "tabs": [],
+    "questions": [
+      {
+        "id": "id-c1",
+        "code": "c1",
+        "sectionTitle": "",
+        "prompt": "prompt c1",
+        "type": "CHECKBOX",
+        "width": "DEFAULT",
+        "typeConfig": {
+          "options": [
+            {
+              "id": "o1",
+              "label": "A"
+            },
+            {
+              "id": "o2",
+              "label": "B"
+            },
+            {
+              "id": "o3",
+              "label": "C"
+            }
+          ],
+          "maxSelections": null
+        },
+        "visibility": {
+          "mode": "ALWAYS"
+        },
+        "requirement": {
+          "mode": "NEVER"
+        }
+      },
+      {
+        "id": "id-dep",
+        "code": "dep",
+        "sectionTitle": "",
+        "prompt": "prompt dep",
+        "type": "TEXT_BOX",
+        "width": "DEFAULT",
+        "typeConfig": {
+          "size": "MEDIUM",
+          "maxLength": null
+        },
+        "visibility": {
+          "mode": "CONDITIONAL",
+          "rule": {
+            "combinator": "ALL",
+            "conditions": [
+              {
+                "source": "QUESTION",
+                "questionCode": "c1",
+                "operator": "NOT_CONTAINS",
+                "value": "C"
+              }
+            ]
+          }
+        },
+        "requirement": {
+          "mode": "NEVER"
+        }
+      }
+    ]
+  },
+  "answers": {
+    "c1": [
+      "A"
+    ]
+  },
+  "expected": {
+    "capHit": false,
+    "visibleQuestionCodes": [
+      "c1",
+      "dep"
+    ],
+    "requiredQuestionCodes": [],
+    "clearedCodes": []
+  }
+}

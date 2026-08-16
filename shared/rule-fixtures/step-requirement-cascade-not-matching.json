@@ -1,0 +1,94 @@
+{
+  "name": "step-requirement-cascade-not-matching",
+  "description": "A non-matching step requirement rule cascades nothing.",
+  "definitionFragment": {
+    "schemaVersion": 1,
+    "steps": [
+      {
+        "id": "id-s1",
+        "title": "s1",
+        "visibility": {
+          "mode": "ALWAYS"
+        },
+        "requirement": {
+          "mode": "NEVER"
+        },
+        "tabs": [],
+        "questions": [
+          {
+            "id": "id-mode",
+            "code": "mode",
+            "sectionTitle": "",
+            "prompt": "prompt mode",
+            "type": "TEXT_BOX",
+            "width": "DEFAULT",
+            "typeConfig": {
+              "size": "MEDIUM"
+            },
+            "visibility": {
+              "mode": "ALWAYS"
+            },
+            "requirement": {
+              "mode": "NEVER"
+            }
+          }
+        ]
+      },
+      {
+        "id": "id-s2",
+        "title": "s2",
+        "visibility": {
+          "mode": "ALWAYS"
+        },
+        "requirement": {
+          "mode": "CONDITIONAL",
+          "rule": {
+            "combinator": "ALL",
+            "conditions": [
+              {
+                "source": "QUESTION",
+                "questionCode": "mode",
+                "operator": "EQUALS",
+                "value": "strict"
+              }
+            ]
+          }
+        },
+        "tabs": [],
+        "questions": [
+          {
+            "id": "id-a",
+            "code": "a",
+            "sectionTitle": "",
+            "prompt": "prompt a",
+            "type": "TEXT_BOX",
+            "width": "DEFAULT",
+            "typeConfig": {
+              "size": "MEDIUM"
+            },
+            "visibility": {
+              "mode": "ALWAYS"
+            },
+            "requirement": {
+              "mode": "NEVER"
+            }
+          }
+        ]
+      }
+    ],
+    "tabs": [],
+    "questions": []
+  },
+  "answers": {
+    "mode": "lax"
+  },
+  "expected": {
+    "capHit": false,
+    "visibleQuestionCodes": [
+      "mode",
+      "a"
+    ],
+    "requiredQuestionCodes": [],
+    "clearedCodes": []
+  }
+}

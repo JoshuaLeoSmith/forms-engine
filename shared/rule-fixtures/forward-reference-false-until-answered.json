@@ -1,0 +1,68 @@
+{
+  "name": "forward-reference-false-until-answered",
+  "description": "A rule may reference a later question (§6.5): it is simply false until that question is answered.",
+  "definitionFragment": {
+    "schemaVersion": 1,
+    "steps": [],
+    "tabs": [],
+    "questions": [
+      {
+        "id": "id-early",
+        "code": "early",
+        "sectionTitle": "",
+        "prompt": "prompt early",
+        "type": "TEXT_BOX",
+        "width": "DEFAULT",
+        "typeConfig": {
+          "size": "MEDIUM"
+        },
+        "visibility": {
+          "mode": "CONDITIONAL",
+          "rule": {
+            "combinator": "ALL",
+            "conditions": [
+              {
+                "source": "QUESTION",
+                "questionCode": "late",
+                "operator": "EQUALS",
+                "value": "on"
+              }
+            ]
+          }
+        },
+        "requirement": {
+          "mode": "NEVER"
+        }
+      },
+      {
+        "id": "id-late",
+        "code": "late",
+        "sectionTitle": "",
+        "prompt": "prompt late",
+        "type": "TEXT_BOX",
+        "width": "DEFAULT",
+        "typeConfig": {
+          "size": "MEDIUM"
+        },
+        "visibility": {
+          "mode": "ALWAYS"
+        },
+        "requirement": {
+          "mode": "NEVER"
+        }
+      }
+    ]
+  },
+  "answers": {
+    "late": "on"
+  },
+  "expected": {
+    "capHit": false,
+    "visibleQuestionCodes": [
+      "early",
+      "late"
+    ],
+    "requiredQuestionCodes": [],
+    "clearedCodes": []
+  }
+}

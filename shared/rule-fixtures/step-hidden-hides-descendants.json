@@ -1,0 +1,96 @@
+{
+  "name": "step-hidden-hides-descendants",
+  "description": "Effective visibility is hierarchical (§6.2): a hidden step hides (and clears) its questions.",
+  "definitionFragment": {
+    "schemaVersion": 1,
+    "steps": [
+      {
+        "id": "id-s1",
+        "title": "s1",
+        "visibility": {
+          "mode": "ALWAYS"
+        },
+        "requirement": {
+          "mode": "NEVER"
+        },
+        "tabs": [],
+        "questions": [
+          {
+            "id": "id-gate",
+            "code": "gate",
+            "sectionTitle": "",
+            "prompt": "prompt gate",
+            "type": "TEXT_BOX",
+            "width": "DEFAULT",
+            "typeConfig": {
+              "size": "MEDIUM"
+            },
+            "visibility": {
+              "mode": "ALWAYS"
+            },
+            "requirement": {
+              "mode": "NEVER"
+            }
+          }
+        ]
+      },
+      {
+        "id": "id-s2",
+        "title": "s2",
+        "visibility": {
+          "mode": "CONDITIONAL",
+          "rule": {
+            "combinator": "ALL",
+            "conditions": [
+              {
+                "source": "QUESTION",
+                "questionCode": "gate",
+                "operator": "EQUALS",
+                "value": "open"
+              }
+            ]
+          }
+        },
+        "requirement": {
+          "mode": "NEVER"
+        },
+        "tabs": [],
+        "questions": [
+          {
+            "id": "id-inner",
+            "code": "inner",
+            "sectionTitle": "",
+            "prompt": "prompt inner",
+            "type": "TEXT_BOX",
+            "width": "DEFAULT",
+            "typeConfig": {
+              "size": "MEDIUM"
+            },
+            "visibility": {
+              "mode": "ALWAYS"
+            },
+            "requirement": {
+              "mode": "NEVER"
+            }
+          }
+        ]
+      }
+    ],
+    "tabs": [],
+    "questions": []
+  },
+  "answers": {
+    "gate": "closed",
+    "inner": "stale"
+  },
+  "expected": {
+    "capHit": false,
+    "visibleQuestionCodes": [
+      "gate"
+    ],
+    "requiredQuestionCodes": [],
+    "clearedCodes": [
+      "inner"
+    ]
+  }
+}

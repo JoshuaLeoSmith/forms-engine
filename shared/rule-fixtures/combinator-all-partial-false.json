@@ -1,0 +1,92 @@
+{
+  "name": "combinator-all-partial-false",
+  "description": "ALL is false when any condition fails.",
+  "definitionFragment": {
+    "schemaVersion": 1,
+    "steps": [],
+    "tabs": [],
+    "questions": [
+      {
+        "id": "id-a",
+        "code": "a",
+        "sectionTitle": "",
+        "prompt": "prompt a",
+        "type": "TEXT_BOX",
+        "width": "DEFAULT",
+        "typeConfig": {
+          "size": "MEDIUM"
+        },
+        "visibility": {
+          "mode": "ALWAYS"
+        },
+        "requirement": {
+          "mode": "NEVER"
+        }
+      },
+      {
+        "id": "id-b",
+        "code": "b",
+        "sectionTitle": "",
+        "prompt": "prompt b",
+        "type": "TEXT_BOX",
+        "width": "DEFAULT",
+        "typeConfig": {
+          "size": "MEDIUM"
+        },
+        "visibility": {
+          "mode": "ALWAYS"
+        },
+        "requirement": {
+          "mode": "NEVER"
+        }
+      },
+      {
+        "id": "id-c",
+        "code": "c",
+        "sectionTitle": "",
+        "prompt": "prompt c",
+        "type": "TEXT_BOX",
+        "width": "DEFAULT",
+        "typeConfig": {
+          "size": "MEDIUM"
+        },
+        "visibility": {
+          "mode": "CONDITIONAL",
+          "rule": {
+            "combinator": "ALL",
+            "conditions": [
+              {
+                "source": "QUESTION",
+                "questionCode": "a",
+                "operator": "EQUALS",
+                "value": "1"
+              },
+              {
+                "source": "QUESTION",
+                "questionCode": "b",
+                "operator": "EQUALS",
+                "value": "2"
+              }
+            ]
+          }
+        },
+        "requirement": {
+          "mode": "NEVER"
+        }
+      }
+    ]
+  },
+  "answers": {
+    "a": "1",
+    "b": "x"
+  },
+  "expected": {
+    "capHit": false,
+    "visibleQuestionCodes": [
+      "a",
+      "b"
+    ],
+    "requiredQuestionCodes": [],
+    "clearedCodes": []
+  }
+}

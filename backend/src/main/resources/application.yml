@@ -1,0 +1,59 @@
+spring:
+  data:
+    mongodb:
+      uri: ${MONGODB_URI:mongodb://localhost:27017/forms_engine}
+      auto-index-creation: true
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+  # FR3-19: the servlet multipart limits themselves are derived from
+  # forms.uploads.max-file-size-mb in MultipartLimitsConfig (file cap + 1 MB of
+  # request slack for the boundary/parts), so the framework boundary always
+  # tracks MAX_FILE_SIZE_MB. Parts spool to disk — no heap growth (NFR3-1).
+
+server:
+  port: ${PORT:8080}
+
+forms:
+  rate-limit:
+    enabled: ${FORMS_RATE_LIMIT_ENABLED:true}
+    capacity: 20
+    refill-per-second: 10
+    geocode-capacity: 10
+    geocode-refill-per-second: 2
+    # FR3-25: dedicated upload bucket, 30 uploads / 10 min / IP by default.
+    upload-capacity: ${UPLOAD_RATE_CAPACITY:30}
+    upload-refill-per-second: 0.05
+    # FR5-10: dedicated, stricter ref-status bucket — the endpoint reveals a
+    # completion boolean per ref, so enumeration attempts should 429 quickly.
+    ref-status-capacity: ${REF_STATUS_RATE_CAPACITY:10}
+    ref-status-refill-per-second: ${REF_STATUS_RATE_REFILL_PER_SECOND:1}
+  photon:
+    # FR2-12: the public Photon instance is a fair-use community service —
+    # fine for evaluation, self-host Photon for production traffic.
+    base-url: ${PHOTON_BASE_URL:https://photon.komoot.io}
+  storage:
+    # FR3-2: filesystem for bare local runs; the shipped compose stack sets s3
+    # (MinIO) so self-hosters exercise the production-identical path (P3-D8).
+    mode: ${STORAGE_MODE:filesystem}
+    # FR3-3: created if absent; startup fails loudly if not writable.
+    fs-path: ${FS_STORAGE_PATH:./data/uploads}
+    s3:
+      # FR3-4: empty endpoint = real AWS (the SDK derives it from the region);
+      # path-style true for MinIO and most compatibles, false for AWS.
+      endpoint: ${S3_ENDPOINT:}
+      bucket: ${S3_BUCKET:forms-engine-uploads}
+      access-key: ${S3_ACCESS_KEY:}
+      secret-key: ${S3_SECRET_KEY:}
+      region: ${S3_REGION:us-east-1}
+      path-style: ${S3_PATH_STYLE:true}
+  uploads:
+    # FR3-19 defense-in-depth caps (P3-D1): per-file system cap (also bounds
+    # the editor's maxFileSizeMb input), per-response totals.
+    max-file-size-mb: ${MAX_FILE_SIZE_MB:50}
+    max-files-per-response: ${MAX_FILES_PER_RESPONSE:20}
+    max-bytes-per-response-mb: ${MAX_BYTES_PER_RESPONSE_MB:200}
+    # FR3-12: hourly orphan cleanup with a 24 h grace period.
+    cleanup-enabled: ${FILE_CLEANUP_ENABLED:true}
+    cleanup-cron: ${FILE_CLEANUP_CRON:0 0 * * * *}
+    orphan-grace-hours: ${FILE_ORPHAN_GRACE_HOURS:24}

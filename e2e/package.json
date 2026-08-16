@@ -1,0 +1,12 @@
+{
+  "name": "forms-engine-e2e",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Playwright end-to-end for the BRD §15 acceptance walkthrough. Requires the docker-compose stack (editor :8081, backend :8080) to be up.",
+  "scripts": {
+    "test": "playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.50.0"
+  }
+}

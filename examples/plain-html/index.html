@@ -1,0 +1,48 @@
+<!doctype html>
+<!--
+  Forms-Engine plain-HTML example (FR6-4): mounts the questionnaire and logs
+  the component's events to the browser console. Nothing else.
+
+  ⚠ Kept in sync with the editor's Embed panel snippet (FR-E-2):
+    editor/src/app/features/workspace/embed-dialog.component.ts (buildSnippets)
+  If the mounting markup below changes, change it there too.
+
+  CONFIG — the only two values to edit are on the element below:
+    public-id : printed by `node examples/seed/seed.mjs`
+    api-base  : your backend URL (docker-compose default shown)
+
+  Run from the repo root — module scripts cannot load over file://, and the
+  script src points at the locally built bundle:
+    npm install && npm run build     # once, builds the renderer bundle
+    npx serve .                      # any static file server works
+  then open http://localhost:3000/examples/plain-html/
+
+  Outside this repo, load the bundle from a CDN instead:
+    <script type="module" src="https://unpkg.com/@forms-engine/renderer/dist/forms-engine.esm.js"></script>
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Forms-Engine — plain HTML example</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    /* A centered container is the only styling an embed needs. */
+    body { font-family: system-ui, sans-serif; margin: 2rem auto; max-width: 720px; padding: 0 1rem; }
+  </style>
+</head>
+<body>
+  <script type="module" src="../../packages/renderer/dist/forms-engine.esm.js"></script>
+  <forms-engine
+    public-id="PASTE_PUBLIC_ID_HERE"
+    api-base="http://localhost:8080">
+  </forms-engine>
+
+  <script>
+    // Log every event the component emits — the entire observable contract.
+    const el = document.querySelector('forms-engine');
+    for (const type of ['fe-loaded', 'fe-screen-changed', 'fe-completed', 'fe-error', 'fe-resumed', 'fe-already-submitted']) {
+      el.addEventListener(type, (event) => console.log(type, event.detail));
+    }
+  </script>
+</body>
+</html>

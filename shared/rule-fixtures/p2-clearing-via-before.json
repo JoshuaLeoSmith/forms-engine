@@ -1,0 +1,105 @@
+{
+  "name": "p2-clearing-via-before",
+  "description": "Clearing cascade: hiding via BEFORE clears the hidden answer, which cascades onward.",
+  "definitionFragment": {
+    "schemaVersion": 2,
+    "steps": [],
+    "tabs": [],
+    "questions": [
+      {
+        "id": "id-d1",
+        "code": "d1",
+        "sectionTitle": "",
+        "prompt": "prompt d1",
+        "type": "DATE",
+        "width": "DEFAULT",
+        "typeConfig": {
+          "minDate": null,
+          "maxDate": null,
+          "disallowPast": false,
+          "disallowFuture": false
+        },
+        "visibility": {
+          "mode": "ALWAYS"
+        },
+        "requirement": {
+          "mode": "NEVER"
+        }
+      },
+      {
+        "id": "id-mid",
+        "code": "mid",
+        "sectionTitle": "",
+        "prompt": "prompt mid",
+        "type": "TEXT_BOX",
+        "width": "DEFAULT",
+        "typeConfig": {
+          "size": "MEDIUM",
+          "maxLength": null
+        },
+        "visibility": {
+          "mode": "CONDITIONAL",
+          "rule": {
+            "combinator": "ALL",
+            "conditions": [
+              {
+                "source": "QUESTION",
+                "questionCode": "d1",
+                "operator": "BEFORE",
+                "value": "2026-01-01"
+              }
+            ]
+          }
+        },
+        "requirement": {
+          "mode": "NEVER"
+        }
+      },
+      {
+        "id": "id-leaf",
+        "code": "leaf",
+        "sectionTitle": "",
+        "prompt": "prompt leaf",
+        "type": "TEXT_BOX",
+        "width": "DEFAULT",
+        "typeConfig": {
+          "size": "MEDIUM",
+          "maxLength": null
+        },
+        "visibility": {
+          "mode": "CONDITIONAL",
+          "rule": {
+            "combinator": "ALL",
+            "conditions": [
+              {
+                "source": "QUESTION",
+                "questionCode": "mid",
+                "operator": "EQUALS",
+                "value": "kept"
+              }
+            ]
+          }
+        },
+        "requirement": {
+          "mode": "NEVER"
+        }
+      }
+    ]
+  },
+  "answers": {
+    "d1": "2026-06-01",
+    "mid": "kept",
+    "leaf": "downstream"
+  },
+  "expected": {
+    "capHit": false,
+    "visibleQuestionCodes": [
+      "d1"
+    ],
+    "requiredQuestionCodes": [],
+    "clearedCodes": [
+      "mid",
+      "leaf"
+    ]
+  }
+}

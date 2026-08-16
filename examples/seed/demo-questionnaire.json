@@ -1,0 +1,83 @@
+{
+  "_comment": "Demo questionnaire for the examples (FR6-8): a trimmed acceptance-walkthrough questionnaire — two steps, one required text box (gating), one toggle, and one radio whose visibility rule fires when the toggle is Yes. Deliberately no FILE_UPLOAD question so the examples run against storage-less dev backends (P6-D3). This is a Phase-4 export file (FR4-11/12): re-export from any editor to maintain it; `node seed.mjs` imports and publishes it.",
+  "formsEngineExport": 1,
+  "exportedAt": "2026-08-16T00:00:00Z",
+  "name": "Demo Questionnaire",
+  "definition": {
+    "schemaVersion": 2,
+    "steps": [
+      {
+        "id": "step-food",
+        "title": "Food",
+        "visibility": { "mode": "ALWAYS" },
+        "requirement": { "mode": "NEVER" },
+        "tabs": [],
+        "questions": [
+          {
+            "id": "q-food1",
+            "code": "food1",
+            "sectionTitle": "",
+            "prompt": "What is your favorite food?",
+            "type": "TEXT_BOX",
+            "width": "DEFAULT",
+            "typeConfig": { "size": "MEDIUM", "maxLength": null },
+            "visibility": { "mode": "ALWAYS" },
+            "requirement": { "mode": "ALWAYS" }
+          }
+        ]
+      },
+      {
+        "id": "step-dessert",
+        "title": "Dessert",
+        "visibility": { "mode": "ALWAYS" },
+        "requirement": { "mode": "NEVER" },
+        "tabs": [],
+        "questions": [
+          {
+            "id": "q-wants-dessert",
+            "code": "wantsDessert",
+            "sectionTitle": "",
+            "prompt": "Would you like dessert?",
+            "type": "TOGGLE",
+            "width": "DEFAULT",
+            "typeConfig": { "trueLabel": "Yes", "falseLabel": "No" },
+            "visibility": { "mode": "ALWAYS" },
+            "requirement": { "mode": "ALWAYS" }
+          },
+          {
+            "id": "q-dessert",
+            "code": "dessert",
+            "sectionTitle": "",
+            "prompt": "What is the best dessert?",
+            "type": "RADIO",
+            "width": "DEFAULT",
+            "typeConfig": {
+              "options": [
+                { "id": "cake", "label": "Cake" },
+                { "id": "ice-cream", "label": "Ice cream" },
+                { "id": "cookies", "label": "Cookies" }
+              ]
+            },
+            "visibility": {
+              "mode": "CONDITIONAL",
+              "rule": {
+                "combinator": "ALL",
+                "conditions": [
+                  {
+                    "source": "QUESTION",
+                    "questionCode": "wantsDessert",
+                    "operator": "EQUALS",
+                    "value": true
+                  }
+                ]
+              }
+            },
+            "requirement": { "mode": "NEVER" }
+          }
+        ]
+      }
+    ],
+    "tabs": [],
+    "questions": []
+  }
+}

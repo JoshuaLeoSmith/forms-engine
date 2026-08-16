@@ -1,0 +1,91 @@
+{
+  "name": "combinator-any-false",
+  "description": "ANY is false when no condition is true.",
+  "definitionFragment": {
+    "schemaVersion": 1,
+    "steps": [],
+    "tabs": [],
+    "questions": [
+      {
+        "id": "id-a",
+        "code": "a",
+        "sectionTitle": "",
+        "prompt": "prompt a",
+        "type": "TEXT_BOX",
+        "width": "DEFAULT",
+        "typeConfig": {
+          "size": "MEDIUM"
+        },
+        "visibility": {
+          "mode": "ALWAYS"
+        },
+        "requirement": {
+          "mode": "NEVER"
+        }
+      },
+      {
+        "id": "id-b",
+        "code": "b",
+        "sectionTitle": "",
+        "prompt": "prompt b",
+        "type": "TEXT_BOX",
+        "width": "DEFAULT",
+        "typeConfig": {
+          "size": "MEDIUM"
+        },
+        "visibility": {
+          "mode": "ALWAYS"
+        },
+        "requirement": {
+          "mode": "NEVER"
+        }
+      },
+      {
+        "id": "id-c",
+        "code": "c",
+        "sectionTitle": "",
+        "prompt": "prompt c",
+        "type": "TEXT_BOX",
+        "width": "DEFAULT",
+        "typeConfig": {
+          "size": "MEDIUM"
+        },
+        "visibility": {
+          "mode": "CONDITIONAL",
+          "rule": {
+            "combinator": "ANY",
+            "conditions": [
+              {
+                "source": "QUESTION",
+                "questionCode": "a",
+                "operator": "EQUALS",
+                "value": "1"
+              },
+              {
+                "source": "QUESTION",
+                "questionCode": "b",
+                "operator": "EQUALS",
+                "value": "2"
+              }
+            ]
+          }
+        },
+        "requirement": {
+          "mode": "NEVER"
+        }
+      }
+    ]
+  },
+  "answers": {
+    "a": "x"
+  },
+  "expected": {
+    "capHit": false,
+    "visibleQuestionCodes": [
+      "a",
+      "b"
+    ],
+    "requiredQuestionCodes": [],
+    "clearedCodes": []
+  }
+}

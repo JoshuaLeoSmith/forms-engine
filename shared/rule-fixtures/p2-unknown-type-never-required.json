@@ -1,0 +1,56 @@
+{
+  "name": "p2-unknown-type-never-required",
+  "description": "Unknown question types are never required — an old renderer must not be blocked (FR2-9, P2-D7).",
+  "definitionFragment": {
+    "schemaVersion": 2,
+    "steps": [],
+    "tabs": [],
+    "questions": [
+      {
+        "id": "id-mystery",
+        "code": "mystery",
+        "sectionTitle": "",
+        "prompt": "prompt mystery",
+        "type": "HOLOGRAM",
+        "width": "DEFAULT",
+        "typeConfig": {},
+        "visibility": {
+          "mode": "ALWAYS"
+        },
+        "requirement": {
+          "mode": "ALWAYS"
+        }
+      },
+      {
+        "id": "id-t1",
+        "code": "t1",
+        "sectionTitle": "",
+        "prompt": "prompt t1",
+        "type": "TEXT_BOX",
+        "width": "DEFAULT",
+        "typeConfig": {
+          "size": "MEDIUM",
+          "maxLength": null
+        },
+        "visibility": {
+          "mode": "ALWAYS"
+        },
+        "requirement": {
+          "mode": "ALWAYS"
+        }
+      }
+    ]
+  },
+  "answers": {},
+  "expected": {
+    "capHit": false,
+    "visibleQuestionCodes": [
+      "mystery",
+      "t1"
+    ],
+    "requiredQuestionCodes": [
+      "t1"
+    ],
+    "clearedCodes": []
+  }
+}

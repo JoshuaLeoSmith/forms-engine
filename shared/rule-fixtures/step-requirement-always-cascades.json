@@ -1,0 +1,71 @@
+{
+  "name": "step-requirement-always-cascades",
+  "description": "ALWAYS requirement on a step requires every visible descendant.",
+  "definitionFragment": {
+    "schemaVersion": 1,
+    "steps": [
+      {
+        "id": "id-s1",
+        "title": "s1",
+        "visibility": {
+          "mode": "ALWAYS"
+        },
+        "requirement": {
+          "mode": "ALWAYS"
+        },
+        "tabs": [],
+        "questions": [
+          {
+            "id": "id-a",
+            "code": "a",
+            "sectionTitle": "",
+            "prompt": "prompt a",
+            "type": "TEXT_BOX",
+            "width": "DEFAULT",
+            "typeConfig": {
+              "size": "MEDIUM"
+            },
+            "visibility": {
+              "mode": "ALWAYS"
+            },
+            "requirement": {
+              "mode": "NEVER"
+            }
+          },
+          {
+            "id": "id-b",
+            "code": "b",
+            "sectionTitle": "",
+            "prompt": "prompt b",
+            "type": "TEXT_BOX",
+            "width": "DEFAULT",
+            "typeConfig": {
+              "size": "MEDIUM"
+            },
+            "visibility": {
+              "mode": "ALWAYS"
+            },
+            "requirement": {
+              "mode": "NEVER"
+            }
+          }
+        ]
+      }
+    ],
+    "tabs": [],
+    "questions": []
+  },
+  "answers": {},
+  "expected": {
+    "capHit": false,
+    "visibleQuestionCodes": [
+      "a",
+      "b"
+    ],
+    "requiredQuestionCodes": [
+      "a",
+      "b"
+    ],
+    "clearedCodes": []
+  }
+}

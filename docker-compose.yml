@@ -1,0 +1,91 @@
+# Forms-Engine self-hosting stack (FR-P-1): `docker compose up` brings up
+# MongoDB, MinIO (file storage), the backend, and the editor. Defaults suit
+# localhost; override via environment variables or an .env file.
+#
+# Phase 3 (P3-D8): the shipped stack uses S3-compatible storage (MinIO) so
+# self-hosters exercise the production-identical upload path. Set
+# STORAGE_MODE=filesystem for a minimal install without MinIO.
+services:
+  mongo:
+    image: mongo:7
+    restart: unless-stopped
+    volumes:
+      - mongo-data:/data/db
+    ports:
+      - "${MONGO_PORT:-27017}:27017"
+
+  minio:
+    image: minio/minio:latest
+    restart: unless-stopped
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER:-minioadmin}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-minioadmin}
+    volumes:
+      - minio-data:/data
+    ports:
+      - "${MINIO_PORT:-9000}:9000"
+      # MinIO web console, for inspecting uploaded objects (FR3-5).
+      - "${MINIO_CONSOLE_PORT:-9001}:9001"
+
+  # One-shot bucket creation (FR3-5): `docker compose up` remains the entire
+  # self-host setup — no manual bucket clicking. Retries until MinIO is up.
+  minio-init:
+    image: minio/mc:latest
+    depends_on:
+      - minio
+    entrypoint: >
+      /bin/sh -c "
+      until mc alias set local http://minio:9000 ${MINIO_ROOT_USER:-minioadmin} ${MINIO_ROOT_PASSWORD:-minioadmin}; do sleep 1; done &&
+      mc mb --ignore-existing local/${S3_BUCKET:-forms-engine-uploads}
+      "
+
+  backend:
+    build: ./backend
+    restart: unless-stopped
+    depends_on:
+      mongo:
+        condition: service_started
+      minio-init:
+        condition: service_completed_successfully
+    environment:
+      MONGODB_URI: mongodb://mongo:27017/forms_engine
+      PORT: 8080
+      # Geocoder for address autocomplete (FR2-12). The default public Photon
+      # instance is fair-use — self-host for production (see README).
+      PHOTON_BASE_URL: ${PHOTON_BASE_URL:-https://photon.komoot.io}
+      # File storage (Phase 3 §2). The stack default is MinIO; switch to
+      # STORAGE_MODE=filesystem (and remove the minio services) for bare runs.
+      STORAGE_MODE: ${STORAGE_MODE:-s3}
+      S3_ENDPOINT: ${S3_ENDPOINT:-http://minio:9000}
+      S3_BUCKET: ${S3_BUCKET:-forms-engine-uploads}
+      S3_ACCESS_KEY: ${MINIO_ROOT_USER:-minioadmin}
+      S3_SECRET_KEY: ${MINIO_ROOT_PASSWORD:-minioadmin}
+      S3_REGION: ${S3_REGION:-us-east-1}
+      # true for MinIO and most S3-compatibles; false/omit for real AWS (§2.2).
+      S3_PATH_STYLE: ${S3_PATH_STYLE:-true}
+      # Upload caps (FR3-19) and orphan cleanup (FR3-12), env-tunable.
+      MAX_FILE_SIZE_MB: ${MAX_FILE_SIZE_MB:-50}
+      MAX_FILES_PER_RESPONSE: ${MAX_FILES_PER_RESPONSE:-20}
+      MAX_BYTES_PER_RESPONSE_MB: ${MAX_BYTES_PER_RESPONSE_MB:-200}
+      FILE_ORPHAN_GRACE_HOURS: ${FILE_ORPHAN_GRACE_HOURS:-24}
+    ports:
+      - "${BACKEND_PORT:-8080}:8080"
+
+  editor:
+    build:
+      context: .
+      dockerfile: editor/Dockerfile
+    restart: unless-stopped
+    depends_on:
+      - backend
+    environment:
+      # The browser-facing URL of the backend (used by the editor and the
+      # embed snippets). Change when exposing the stack beyond localhost.
+      FE_API_BASE: ${FE_API_BASE:-http://localhost:8080}
+    ports:
+      - "${EDITOR_PORT:-8081}:80"
+
+volumes:
+  mongo-data:
+  minio-data:

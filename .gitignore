@@ -1,13 +1,11 @@
-# See https://docs.github.com/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
-
 # Compiled output
-/dist
-/tmp
-/out-tsc
-/bazel-out
+dist/
+tmp/
+out-tsc/
+target/
 
 # Node
-/node_modules
+node_modules/
 npm-debug.log
 yarn-error.log
 
@@ -30,15 +28,25 @@ yarn-error.log
 .history/*
 
 # Miscellaneous
-/.angular/cache
+.angular/
 .sass-cache/
 /connect.lock
-/coverage
+coverage/
 /libpeerconnection.log
 testem.log
 /typings
 __screenshots__/
 
+# Playwright
+test-results/
+playwright-report/
+
 # System files
 .DS_Store
 Thumbs.db
+
+# Demo videos are never committed (FR61-6): GitHub only renders an inline
+# player for files uploaded via the web editor (github.com/user-attachments),
+# not for repo-committed videos — see the placeholders in README.md.
+# Poster images (docs/media/*.png) are fine to commit; videos are not.
+*.mp4

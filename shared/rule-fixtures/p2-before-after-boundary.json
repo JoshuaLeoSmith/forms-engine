@@ -1,0 +1,100 @@
+{
+  "name": "p2-before-after-boundary",
+  "description": "BEFORE/AFTER are strict: equal dates fire neither (ISO string comparison).",
+  "definitionFragment": {
+    "schemaVersion": 2,
+    "steps": [],
+    "tabs": [],
+    "questions": [
+      {
+        "id": "id-d1",
+        "code": "d1",
+        "sectionTitle": "",
+        "prompt": "prompt d1",
+        "type": "DATE",
+        "width": "DEFAULT",
+        "typeConfig": {
+          "minDate": null,
+          "maxDate": null,
+          "disallowPast": false,
+          "disallowFuture": false
+        },
+        "visibility": {
+          "mode": "ALWAYS"
+        },
+        "requirement": {
+          "mode": "NEVER"
+        }
+      },
+      {
+        "id": "id-before",
+        "code": "before",
+        "sectionTitle": "",
+        "prompt": "prompt before",
+        "type": "TEXT_BOX",
+        "width": "DEFAULT",
+        "typeConfig": {
+          "size": "MEDIUM",
+          "maxLength": null
+        },
+        "visibility": {
+          "mode": "CONDITIONAL",
+          "rule": {
+            "combinator": "ALL",
+            "conditions": [
+              {
+                "source": "QUESTION",
+                "questionCode": "d1",
+                "operator": "BEFORE",
+                "value": "2026-05-10"
+              }
+            ]
+          }
+        },
+        "requirement": {
+          "mode": "NEVER"
+        }
+      },
+      {
+        "id": "id-after",
+        "code": "after",
+        "sectionTitle": "",
+        "prompt": "prompt after",
+        "type": "TEXT_BOX",
+        "width": "DEFAULT",
+        "typeConfig": {
+          "size": "MEDIUM",
+          "maxLength": null
+        },
+        "visibility": {
+          "mode": "CONDITIONAL",
+          "rule": {
+            "combinator": "ALL",
+            "conditions": [
+              {
+                "source": "QUESTION",
+                "questionCode": "d1",
+                "operator": "AFTER",
+                "value": "2026-05-10"
+              }
+            ]
+          }
+        },
+        "requirement": {
+          "mode": "NEVER"
+        }
+      }
+    ]
+  },
+  "answers": {
+    "d1": "2026-05-10"
+  },
+  "expected": {
+    "capHit": false,
+    "visibleQuestionCodes": [
+      "d1"
+    ],
+    "requiredQuestionCodes": [],
+    "clearedCodes": []
+  }
+}

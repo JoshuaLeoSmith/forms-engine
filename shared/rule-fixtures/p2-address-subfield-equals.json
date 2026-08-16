@@ -1,0 +1,90 @@
+{
+  "name": "p2-address-subfield-equals",
+  "description": "Address sub-field EQUALS compares the named sub-field string (FR2-6).",
+  "definitionFragment": {
+    "schemaVersion": 2,
+    "steps": [],
+    "tabs": [],
+    "questions": [
+      {
+        "id": "id-addr",
+        "code": "addr",
+        "sectionTitle": "",
+        "prompt": "prompt addr",
+        "type": "ADDRESS",
+        "width": "DEFAULT",
+        "typeConfig": {
+          "enabledFields": {
+            "line2": true,
+            "state": true,
+            "postalCode": true
+          },
+          "requiredFields": {
+            "country": true,
+            "line1": true,
+            "city": true,
+            "state": true,
+            "postalCode": true
+          },
+          "defaultCountry": "US",
+          "autocomplete": true
+        },
+        "visibility": {
+          "mode": "ALWAYS"
+        },
+        "requirement": {
+          "mode": "NEVER"
+        }
+      },
+      {
+        "id": "id-njOnly",
+        "code": "njOnly",
+        "sectionTitle": "",
+        "prompt": "prompt njOnly",
+        "type": "TEXT_BOX",
+        "width": "DEFAULT",
+        "typeConfig": {
+          "size": "MEDIUM",
+          "maxLength": null
+        },
+        "visibility": {
+          "mode": "CONDITIONAL",
+          "rule": {
+            "combinator": "ALL",
+            "conditions": [
+              {
+                "source": "QUESTION",
+                "questionCode": "addr",
+                "subField": "state",
+                "operator": "EQUALS",
+                "value": "NJ"
+              }
+            ]
+          }
+        },
+        "requirement": {
+          "mode": "NEVER"
+        }
+      }
+    ]
+  },
+  "answers": {
+    "addr": {
+      "country": "US",
+      "line1": "12 Main St",
+      "line2": "",
+      "city": "Woodbury",
+      "state": "NJ",
+      "postalCode": "08096"
+    }
+  },
+  "expected": {
+    "capHit": false,
+    "visibleQuestionCodes": [
+      "addr",
+      "njOnly"
+    ],
+    "requiredQuestionCodes": [],
+    "clearedCodes": []
+  }
+}

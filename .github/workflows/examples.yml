@@ -1,0 +1,48 @@
+# FR6-9: builds the three integration examples against the CURRENT workspace
+# renderer/wrappers on every pull request. A breaking change to the public
+# embedding contract must fail here, in the same PR that made it — that is
+# the entire point of keeping the examples in-repo. Build-only (type-check +
+# bundler success); no backends are launched.
+name: examples
+
+on:
+  pull_request:
+  push:
+    branches: [main, master]
+
+jobs:
+  build-examples:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install workspaces
+        run: npm ci
+
+      # Current-source packages first (P6-D1): the examples resolve
+      # @forms-engine/* via workspace references, never npm.
+      - name: Build renderer + wrappers
+        run: npm run build
+
+      - name: Build react + angular examples
+        run: npm run build:examples
+
+      # The plain-html example has no build step; assert the module file its
+      # script tag references exists after the workspace build (FR6-4).
+      - name: Check plain-html example
+        run: |
+          node -e "
+            const fs = require('fs');
+            const path = require('path');
+            const html = fs.readFileSync('examples/plain-html/index.html', 'utf8');
+            const match = html.match(/src=\"(\.\.[^\"]+)\"/);
+            if (!match) { console.error('plain-html example has no relative module src'); process.exit(1); }
+            const bundle = path.resolve('examples/plain-html', match[1]);
+            if (!fs.existsSync(bundle)) { console.error('plain-html example references a missing bundle: ' + bundle); process.exit(1); }
+            console.log('ok: ' + bundle);
+          "
