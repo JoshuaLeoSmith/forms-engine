@@ -26,7 +26,8 @@ export class Page {
 }
 ```
 
-Inputs: `publicId` (required), `apiBase` (required), `theme?`. Outputs:
-`loaded`, `screenChanged`, `completed`, `errored`.
+**Full reference — all inputs, outputs, and event payloads — lives in the
+docs:
+[forms-engine-site.pages.dev/embedding/angular](https://forms-engine-site.pages.dev/embedding/angular/).**
 
 Part of Forms-Engine (MIT).
