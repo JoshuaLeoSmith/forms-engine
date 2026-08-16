@@ -18,7 +18,8 @@ import { FormsEngine } from '@forms-engine/react';
 />
 ```
 
-Props: `publicId`, `apiBase`, `theme?`, `onLoaded?`, `onScreenChanged?`,
-`onCompleted?`, `onError?`, `className?`, `style?`.
+**Full reference — all props, event payloads, and SSR notes — lives in the
+docs:
+[forms-engine-site.pages.dev/embedding/react](https://forms-engine-site.pages.dev/embedding/react/).**
 
 Part of Forms-Engine (MIT).

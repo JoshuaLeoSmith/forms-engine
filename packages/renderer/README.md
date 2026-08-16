@@ -19,10 +19,10 @@ Or from npm:
 import '@forms-engine/renderer'; // registers <forms-engine>
 ```
 
-- **Attributes:** `public-id` (required), `api-base` (required), `theme` (reserved).
-- **Events:** `fe-loaded`, `fe-screen-changed`, `fe-completed` (`{ responseId }`), `fe-error`.
-- **Theming:** CSS custom properties (`--fe-color-primary`, `--fe-font-family`,
-  `--fe-radius`, …); styles are encapsulated in shadow DOM.
+**Full reference — every attribute, event, CSS custom property, and the
+labels override — lives in the docs:
+[forms-engine-site.pages.dev/embedding/web-component](https://forms-engine-site.pages.dev/embedding/web-component/).**
+
 - **Pure core:** `@forms-engine/renderer/core` exports the definition types,
   normalization, and rule engine with no DOM or Lit dependency.
 
