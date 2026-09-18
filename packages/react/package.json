@@ -3,6 +3,15 @@
   "version": "1.1.0",
   "description": "Thin React wrapper for the <forms-engine> web component.",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JoshuaLeoSmith/forms-engine.git",
+    "directory": "packages/react"
+  },
+  "homepage": "https://github.com/JoshuaLeoSmith/forms-engine#readme",
+  "publishConfig": {
+    "access": "public"
+  },
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -20,7 +29,7 @@
     "build": "tsc -p tsconfig.json"
   },
   "dependencies": {
-    "@forms-engine/renderer": "1.1.0"
+    "@forms-engine/renderer": "^1.1.0"
   },
   "peerDependencies": {
     "react": ">=18"
