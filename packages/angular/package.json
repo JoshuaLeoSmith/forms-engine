@@ -3,6 +3,15 @@
   "version": "1.1.0",
   "description": "Thin Angular wrapper for the <forms-engine> web component.",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JoshuaLeoSmith/forms-engine.git",
+    "directory": "packages/angular"
+  },
+  "homepage": "https://github.com/JoshuaLeoSmith/forms-engine#readme",
+  "publishConfig": {
+    "access": "public"
+  },
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -20,7 +29,7 @@
     "build": "ngc -p tsconfig.json"
   },
   "dependencies": {
-    "@forms-engine/renderer": "1.1.0",
+    "@forms-engine/renderer": "^1.1.0",
     "tslib": "^2.8.0"
   },
   "peerDependencies": {
