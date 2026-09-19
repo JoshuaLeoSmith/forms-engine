@@ -347,6 +347,13 @@ Declared plainly so they read as roadmap, not surprises:
    guessable reference must never unlock a session. Arrives with signed
    references.
 
+## Contributing
+
+Contributions are welcome — see [CONTRIBUTING.md](CONTRIBUTING.md). In short:
+comment on the issue before opening a pull request, keep changes small and
+tested, and every pull request needs a human author who can discuss it in
+review (pull requests from autonomous agents are closed without review).
+
 ## AI Disclaimer
 
 I designed and specified Forms-Engine, and used [Claude Code](https://claude.com/claude-code) to write much of the implementation from those specs. Design decisions, code review, and maintenance are mine.
