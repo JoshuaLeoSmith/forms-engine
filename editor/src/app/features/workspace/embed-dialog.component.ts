@@ -149,9 +149,16 @@ export class EmbedDialogComponent {
   protected readonly snippets = buildSnippets(this.data.detail.publicId);
 
   protected copy(code: string): void {
-    void navigator.clipboard
-      .writeText(code)
-      .then(() => this.snackBar.open('Copied to clipboard', undefined, { duration: 1500 }));
+    const clipboard = navigator.clipboard;
+    if (!clipboard) {
+      this.snackBar.open('Clipboard access is unavailable', 'Dismiss');
+      return;
+    }
+
+    void clipboard.writeText(code).then(
+      () => this.snackBar.open('Copied to clipboard', undefined, { duration: 1500 }),
+      () => this.snackBar.open('Could not copy to clipboard', 'Dismiss'),
+    );
   }
 
   protected async saveOrigins(): Promise<void> {
