@@ -17,17 +17,17 @@ server:
 forms:
   rate-limit:
     enabled: ${FORMS_RATE_LIMIT_ENABLED:true}
-    capacity: 20
-    refill-per-second: 10
-    geocode-capacity: 10
-    geocode-refill-per-second: 2
+    capacity: ${FORMS_RATELIMIT_CAPACITY:20}
+    refill-per-second: ${FORMS_RATELIMIT_REFILLPERSECOND:10}
+    geocode-capacity: ${FORMS_RATELIMIT_GEOCODECAPACITY:10}
+    geocode-refill-per-second: ${FORMS_RATELIMIT_GEOCODEREFILLPERSECOND:2}
     # FR3-25: dedicated upload bucket, 30 uploads / 10 min / IP by default.
-    upload-capacity: ${UPLOAD_RATE_CAPACITY:30}
-    upload-refill-per-second: 0.05
+    upload-capacity: ${FORMS_RATELIMIT_UPLOADCAPACITY:${UPLOAD_RATE_CAPACITY:30}}
+    upload-refill-per-second: ${FORMS_RATELIMIT_UPLOADREFILLPERSECOND:0.05}
     # FR5-10: dedicated, stricter ref-status bucket — the endpoint reveals a
     # completion boolean per ref, so enumeration attempts should 429 quickly.
-    ref-status-capacity: ${REF_STATUS_RATE_CAPACITY:10}
-    ref-status-refill-per-second: ${REF_STATUS_RATE_REFILL_PER_SECOND:1}
+    ref-status-capacity: ${FORMS_RATELIMIT_REFSTATUSCAPACITY:${REF_STATUS_RATE_CAPACITY:10}}
+    ref-status-refill-per-second: ${FORMS_RATELIMIT_REFSTATUSREFILLPERSECOND:${REF_STATUS_RATE_REFILL_PER_SECOND:1}}
   photon:
     # FR2-12: the public Photon instance is a fair-use community service —
     # fine for evaluation, self-host Photon for production traffic.

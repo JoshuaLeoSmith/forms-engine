@@ -176,8 +176,8 @@ nosniff` — files are never served inline and never from a public endpoint.
 **Caps & lifecycle** (all env-tunable): per-file size from the question's
 config, bounded by `MAX_FILE_SIZE_MB` (default 50); per-response
 `MAX_FILES_PER_RESPONSE` (20) and `MAX_BYTES_PER_RESPONSE_MB` (200); upload
-rate limit 30 uploads / 10 min / IP. An hourly orphan-cleanup job
-(`FILE_CLEANUP_CRON`) deletes `ACTIVE` files older than
+rate limit configured by the rate-limit settings below. An hourly
+orphan-cleanup job (`FILE_CLEANUP_CRON`) deletes `ACTIVE` files older than
 `FILE_ORPHAN_GRACE_HOURS` (24) that no response's answers reference — covering
 abandoned sessions and failed deletes. Files referenced by a completed
 response are permanent.
@@ -266,6 +266,27 @@ There is **no authentication** (BRD NFR-3). The split is:
 - `/public/v1/**` is designed to be internet-facing: unguessable response ids,
   per-questionnaire allowed-origin enforcement, input size caps, and per-IP
   rate limiting on mutating endpoints.
+- **Rate-limit tuning:** the backend uses per-IP token buckets. Defaults and
+  the environment variable accepted by the Docker Compose stack are:
+
+  | Application property | Default | What it limits | Compose environment variable |
+  |---|---:|---|---|
+  | `forms.rate-limit.enabled` | `true` | Enables rate limiting | `FORMS_RATE_LIMIT_ENABLED` |
+  | `forms.rate-limit.capacity` | `20` | General mutating public endpoints (burst) | `FORMS_RATELIMIT_CAPACITY` |
+  | `forms.rate-limit.refill-per-second` | `10` | General bucket refill rate | `FORMS_RATELIMIT_REFILLPERSECOND` |
+  | `forms.rate-limit.geocode-capacity` | `10` | Geocode requests (burst) | `FORMS_RATELIMIT_GEOCODECAPACITY` |
+  | `forms.rate-limit.geocode-refill-per-second` | `2` | Geocode bucket refill rate | `FORMS_RATELIMIT_GEOCODEREFILLPERSECOND` |
+  | `forms.rate-limit.upload-capacity` | `30` | Upload requests (burst) | `FORMS_RATELIMIT_UPLOADCAPACITY` |
+  | `forms.rate-limit.upload-refill-per-second` | `0.05` | Upload bucket refill rate | `FORMS_RATELIMIT_UPLOADREFILLPERSECOND` |
+  | `forms.rate-limit.ref-status-capacity` | `10` | Reference-status requests (burst) | `FORMS_RATELIMIT_REFSTATUSCAPACITY` |
+  | `forms.rate-limit.ref-status-refill-per-second` | `1` | Reference-status bucket refill rate | `FORMS_RATELIMIT_REFSTATUSREFILLPERSECOND` |
+
+  For example, this sets the upload burst to 45 per IP while keeping the
+  default refill rate of 0.05 tokens/second (30 uploads per 10 minutes):
+
+  ```sh
+  FORMS_RATELIMIT_UPLOADCAPACITY=45 docker compose up -d backend
+  ```
 - **File uploads:** the `responseId` is the only credential a respondent
   session holds (BRD FR3-26). Anyone holding a responseId can upload to that
   response — within the category allowlist, content verification, and the size
